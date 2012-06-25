@@ -11,6 +11,9 @@
 // physfs
 #include <physfs.h>
 
+// A function that signals a failed
+// load, prevents us from duplicating
+// this again and again
 int loader_fail(lua_State *L)
 {
 	// We haven't found anything, return this
@@ -18,6 +21,8 @@ int loader_fail(lua_State *L)
 	return 1;
 }
 
+// The actual loader, uses PhysicsFs,
+// of course
 int loader(lua_State *L)
 {
 	const char *module_name = lua_tostring(L, 1);
@@ -91,6 +96,8 @@ int loader(lua_State *L)
 	free(tokenized);
 	free(contents);
 
+	// We have the loaded chunk
+	// as return value
 	return 1;
 }
 
@@ -118,6 +125,8 @@ void prepend(lua_State *L)
 	lua_rawseti(L, -2, 1);
 }
 
+// Our entrypoint,
+// obviously
 int main(int argc, char **argv)
 {
 	// Initialize PhysicsFS
@@ -165,5 +174,7 @@ int main(int argc, char **argv)
 	// De-initialize PhysicsFS
 	PHYSFS_deinit();
 
+	// Return the gotten return
+	// value (or 0, if none)
 	return retval;
 }
