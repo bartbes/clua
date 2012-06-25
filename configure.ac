@@ -1,7 +1,7 @@
 AC_INIT([clua], [tip])
 AC_CONFIG_SRCDIR([.])
-AM_INIT_AUTOMAKE([1.10 silent-rules])
-AM_SILENT_RULES
+AM_INIT_AUTOMAKE([1.10 foreign silent-rules])
+AM_SILENT_RULES([yes])
 AC_PROG_CC
 lua=lua
 AC_ARG_WITH([luajit],
