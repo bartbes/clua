@@ -157,6 +157,16 @@ int main(int argc, char **argv)
 	prepend(L);
 	lua_pop(L, 2);
 
+	// Create an arg table where the program name is at index 0
+	int i;
+	lua_createtable(L, argc, 0);
+	for (i = 0; i < argc; i++)
+	{
+		lua_pushstring(L, argv[i]);
+		lua_rawseti(L, -2, i);
+	}
+	lua_setglobal(L, "arg");
+
 	// Try require("."), aka, load,
 	// and run init.lua
 	lua_getglobal(L, "require");
