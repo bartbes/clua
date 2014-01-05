@@ -171,7 +171,7 @@ int main(int argc, char **argv)
 	// and run init.lua
 	lua_getglobal(L, "require");
 	lua_pushstring(L, ".");
-	if (lua_pcall(L, 1, LUA_MULTRET, 0) != 0)
+	if (lua_pcall(L, 1, 1, 0) != 0)
 	{
 		const char *message = lua_tostring(L, -1);
 		fprintf(stderr, "Error: %s\n", message);
